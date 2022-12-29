@@ -1,3 +1,4 @@
+import 'package:aladino/pages/inventario_form.dart';
 import 'package:aladino/pages/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:aladino/pages/home_page.dart';
@@ -15,6 +16,11 @@ void main() {
         GetPage(
           name: "/menu",
           page: () => const MenuPage(),
+          binding: HomeBinding(),
+        ),
+        GetPage(
+          name: "/inventario_form",
+          page: () => InventarioForm(),
           binding: HomeBinding(),
         ),
         GetPage(

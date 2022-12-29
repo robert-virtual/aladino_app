@@ -1,5 +1,5 @@
 import 'package:aladino/pages/cuenta_page.dart';
-import 'package:aladino/pages/ventas.dart';
+import 'package:aladino/pages/inventario.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aladino/controllers/home_controller.dart';
@@ -14,7 +14,7 @@ class MenuPage extends GetView<HomeController> {
             ? IndexedStack(
                 index: controller.currentPage,
                 children: const [
-                  VentasPage(),
+                  InventarioPage(),
                   CuentaPage(),
                 ],
               )

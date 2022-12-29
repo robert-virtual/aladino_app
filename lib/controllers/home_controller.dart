@@ -21,6 +21,22 @@ class HomeBinding extends Bindings {
 class HomeController extends GetxController {
   static const pageSize = 15;
   int currentPage = 0;
+  var clase = "".obs;
+  var detalle = "".obs;
+  var tamano = "".obs;
+  var detalles = [
+    "",
+    "VISO",
+    "SECO",
+    "SECO B",
+    "SECO PEQ B",
+    "LIGERO",
+    "SECO PEQUEÑO",
+    "REZAGO DE CAPA"
+  ].obs;
+  var variedad = "".obs;
+  var clases = ["TRIPA", "BANDA", ""].obs;
+  var variedades = ["HABANO", "COROJO", "PINAREÑO", "2000", ""].obs;
   void setCurrentPage(int value) {
     currentPage = value;
     update();
@@ -33,8 +49,9 @@ class HomeController extends GetxController {
     "https://www.googleapis.com/auth/drive"
   ]);
   GoogleSignInAccount? account;
-  String sheetsBaseUrl = "https://sheets.googleapis.com/v4/spreadsheets/1BlxGdSSrY7--tmSG8HN8y5C4fySoTIiE";
-  String spreadsheetId = "1BlxGdSSrY7--tmSG8HN8y5C4fySoTIiE";
+  String sheetsBaseUrl =
+      "https://sheets.googleapis.com/v4/spreadsheets/1JclMAI-mNBW_eYIzurnStq-1b0r1aPZbU7nQPtnQTnE";
+  String spreadsheetId = "1JclMAI-mNBW_eYIzurnStq-1b0r1aPZbU7nQPtnQTnE";
 
   @override
   void onInit() {
@@ -93,7 +110,6 @@ class HomeController extends GetxController {
       almacenCtrl.error = e;
     }
   }
-
 
   Future<String> sendSheet({
     required String range,
@@ -157,6 +173,4 @@ class HomeController extends GetxController {
       rethrow;
     }
   }
-
-
 }
