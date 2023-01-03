@@ -51,7 +51,7 @@ class InventarioPage extends GetView<HomeController> {
                           Text.rich(TextSpan(children: [
                             const TextSpan(
                               style: TextStyle(fontWeight: FontWeight.bold),
-                              text: "Placa: ",
+                              text: "Paca: ",
                             ),
                             TextSpan(
                               text: data[idx][0],

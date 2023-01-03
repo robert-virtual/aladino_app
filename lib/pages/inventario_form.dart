@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 class InventarioForm extends GetView<HomeController> {
   InventarioForm({Key? key}) : super(key: key);
-  final placa = TextEditingController(text: "S/P");
+  final paca = TextEditingController(text: "S/P");
   final tamano = TextEditingController();
   final corte = TextEditingController(text: "CNA");
   final libras = TextEditingController();
@@ -26,10 +26,10 @@ class InventarioForm extends GetView<HomeController> {
           ),
           const SizedBox(height: 20),
           TextField(
-            controller: placa,
+            controller: paca,
             decoration: const InputDecoration(
               label: Text(
-                "Placa",
+                "Paca",
               ),
             ),
           ),
@@ -143,7 +143,7 @@ class InventarioForm extends GetView<HomeController> {
               String res = await controller.sendSheet(
                 range: "inventario!A:G",
                 data: [
-                  placa.text,
+                  paca.text,
                   controller.clase.value,
                   controller.variedad.value,
                   controller.detalle.value,
