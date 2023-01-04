@@ -1,3 +1,4 @@
+import 'package:aladino/pages/consumo_page.dart';
 import 'package:aladino/pages/cuenta_page.dart';
 import 'package:aladino/pages/inventario.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,10 @@ class MenuPage extends GetView<HomeController> {
         builder: (_) => controller.account != null
             ? IndexedStack(
                 index: controller.currentPage,
-                children: const [
+                children:  [
                   InventarioPage(),
-                  CuentaPage(),
+                  const ConsumoPage(),
+                  const CuentaPage(),
                 ],
               )
             : Center(
@@ -34,6 +36,10 @@ class MenuPage extends GetView<HomeController> {
             BottomNavigationBarItem(
               icon: Icon(Icons.sell),
               label: "Inventario",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.done),
+              label: "Consumo",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.account_box),

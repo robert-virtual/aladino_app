@@ -20,6 +20,7 @@ class HomeBinding extends Bindings {
 
 class HomeController extends GetxController {
   static const pageSize = 15;
+  var librasConsumo = 0.obs;
   int currentPage = 0;
   var clase = "".obs;
   var detalle = "".obs;
@@ -84,7 +85,11 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> signOut() => googleSignIn.disconnect();
+  Future<void> signOut() async {
+    await googleSignIn.disconnect();
+    account = null;
+    update();
+  }
 
   Future<void> fetchPage(
       {required String sheet,
@@ -111,6 +116,35 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<String> updateSheet({
+    required String range,
+    required List data,
+    ValueInputOption valueInputOption = ValueInputOption.USER_ENTERED,
+    InsertDataOption insertdataOption = InsertDataOption.OVERWRITE,
+  }) async {
+    try {
+      if (account == null) {
+        throw "Aun no has iniciado session";
+      }
+      final res = await http.put(
+        Uri.parse(
+            "$sheetsBaseUrl/values/$range?valueInputOption=${valueInputOption.name}"),
+        headers: await account!.authHeaders,
+        body: jsonEncode(
+          {
+            "values": [data]
+          },
+        ),
+      );
+      if (res.statusCode != 200) {
+        print(res.body);
+        throw "Ups ha ocurrido un error ${res.statusCode}";
+      }
+      return "Datos enviados con exito";
+    } catch (e) {
+      rethrow;
+    }
+  }
   Future<String> sendSheet({
     required String range,
     required List data,
