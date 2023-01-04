@@ -20,13 +20,17 @@ class HomeBinding extends Bindings {
 
 class HomeController extends GetxController {
   static const pageSize = 15;
+  var searching = false.obs;
   var librasConsumo = 0.obs;
   int currentPage = 0;
   var clase = "".obs;
   var detalle = "".obs;
   var tamano = "".obs;
+  var filtroClase = "".obs;
+  var filtroDetalle = "".obs;
+  var filtroVariedad = "".obs;
+
   var detalles = [
-    "",
     "VISO",
     "SECO",
     "SECO B",
@@ -34,6 +38,7 @@ class HomeController extends GetxController {
     "LIGERO",
     "SECO PEQUEÑO",
     "REZAGO DE CAPA"
+        "",
   ].obs;
   var variedad = "".obs;
   var clases = ["TRIPA", "BANDA", ""].obs;
@@ -145,6 +150,7 @@ class HomeController extends GetxController {
       rethrow;
     }
   }
+
   Future<String> sendSheet({
     required String range,
     required List data,

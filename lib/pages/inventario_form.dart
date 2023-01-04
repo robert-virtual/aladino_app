@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 class InventarioForm extends GetView<HomeController> {
   InventarioForm({Key? key}) : super(key: key);
+  final formatDate = DateFormat("yyyy-MM-dd");
   final paca = TextEditingController(text: "S/P");
   final tamano = TextEditingController();
   final corte = TextEditingController(text: "CNA");
@@ -14,7 +15,9 @@ class InventarioForm extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Inventario")),
+      appBar: AppBar(
+        title: const Text("Inventario"),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
@@ -110,7 +113,7 @@ class InventarioForm extends GetView<HomeController> {
             ),
           ),
           const SizedBox(height: 20),
-          Text("Fecha: ${f.format(DateTime.now())}"),
+          Text("Fecha: ${formatDate.format(DateTime.now())}"),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -139,18 +142,21 @@ class InventarioForm extends GetView<HomeController> {
           final res = await Get.showOverlay(
             loadingWidget: const Center(child: CircularProgressIndicator()),
             asyncFunction: () async {
+              var insert = [
+                paca.text,
+                controller.clase.value,
+                controller.variedad.value,
+                controller.detalle.value,
+                tamano.text,
+                corte.text,
+                libras.text,
+                formatDate.format(DateTime.now())
+              ];
+              print(insert);
               //guardar cuenta por cobrar
               String res = await controller.sendSheet(
-                range: "inventario!A:G",
-                data: [
-                  paca.text,
-                  controller.clase.value,
-                  controller.variedad.value,
-                  controller.detalle.value,
-                  tamano.text,
-                  corte.text,
-                  libras.text
-                ],
+                range: "inventario!A:H",
+                data: insert,
               );
               return res;
             },
